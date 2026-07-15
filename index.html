@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Unser Bikepacking Abenteuer: Lisa & Paulina radeln von Amsterdam nach Brüssel, 17.–27. September 2026.">
+<meta name="description" content="Unser Bikepacking Abenteuer: Lisa & Paulina radeln von Amsterdam nach Gent, 17.–27. September 2026.">
 <meta name="theme-color" content="#EFE7D5">
-<meta property="og:title" content="Amsterdam → Brüssel · Unsere Reise">
-<meta property="og:description" content="Unser Bikepacking Abenteuer Lisa & Paulina — 7 Städte, ~290 km, 11 Tage.">
+<meta property="og:title" content="Amsterdam → Gent · Unsere Reise">
+<meta property="og:description" content="Unser Bikepacking Abenteuer Lisa & Paulina — 6 Städte, ~225 km, 11 Tage.">
 <meta property="og:type" content="website">
-<title>Amsterdam → Brüssel · Unsere Reise</title>
+<title>Amsterdam → Gent · Unsere Reise</title>
 <style>
   :root {
     --paper:#EFE7D5; --land:#E5DCC5; --card:#F7F1E3;
@@ -128,10 +128,10 @@
  <div class="wrap">
   <header>
     <p class="eyebrow">Eine Überraschung · Herbst 2026</p>
-    <h1>Von Amsterdam <em>bergab</em> nach Brüssel</h1>
-    <p class="lede">Unser Bikepacking Abenteuer Lisa &amp; Paulina 🚲</p>
+    <h1>Von Amsterdam <em>bergab</em> nach Gent</h1>
+    <p class="lede">Unser Bikepacking Abenteuer Lisa &amp; Paulina </p>
     <div class="stats">
-      <span>7 Städte</span><span>~290 km</span><span>11 Tage</span><span>meist ~3 Std/Tag</span><span>17.–27. Sep 2026</span>
+      <span>6 Städte</span><span>~225 km</span><span>11 Tage</span><span>meist ~3 Std/Tag</span><span>17.–27. Sep 2026</span>
     </div>
     <div class="legend">
       <b><span class="dot" style="background:var(--kreativ)"></span>🎨 Kreativ</b>
@@ -143,9 +143,9 @@
   <div class="grid">
     <div class="mapcol">
       <div class="mapframe">
-        <svg class="map" viewBox="0 0 560 830" role="img" aria-label="Karte der Radroute von Amsterdam nach Brüssel">
+        <svg class="map" viewBox="0 0 560 700" role="img" aria-label="Karte der Radroute von Amsterdam nach Gent">
           <!-- sea -->
-          <rect x="0" y="0" width="86" height="830" fill="var(--sea)"/>
+          <rect x="0" y="0" width="86" height="700" fill="var(--sea)"/>
           <path d="M86 0 C 70 120, 104 210, 78 330 C 60 430, 100 520, 74 640 C 58 730, 92 790, 80 830" fill="none" stroke="var(--sea-line)" stroke-width="1.4" opacity=".5"/>
           <g stroke="var(--sea-line)" stroke-width="1.2" opacity=".45" fill="none">
             <path d="M20 150 q10 -6 20 0 t20 0"/>
@@ -171,57 +171,51 @@
   </div>
 
   <div class="note">
-    <p><b>Übernachten:</b> In Amsterdam, Rotterdam, Antwerpen, Gent & Brüssel gibt's große Couchsurfing-Communities 🛏️. Leiden & Dordrecht sind kleiner, dort notfalls ein günstiges B&B.</p>
-    <p><b>Etappen zu lang?</b> Tag 6 & 8 (~55 km) lassen sich easy per <b>Zug-Teilstück</b> kürzen. Räder darf man in NL & BE problemlos mitnehmen.</p>
-    <p><b>Lust auf mehr?</b> Ab Gent ist <b>Brügge</b> der schönste Abstecher (+1 Tag). Sag Bescheid, dann bau ich's ein.</p>
+    <p><b>Übernachten:</b> In Amsterdam, Rotterdam, Antwerpen & Gent gibt's große Couchsurfing-Communities 🛏️. Leiden & Dordrecht sind kleiner, dort notfalls ein günstiges B&B.</p>
+    <p><b>Etappen zu lang?</b> Die längeren Legs (Dordrecht → Antwerpen & Antwerpen → Gent, ~50–55 km) lassen sich easy per <b>Zug-Teilstück</b> kürzen. Räder darf man in NL & BE problemlos mitnehmen.</p>
+    <p><b>Lust auf mehr?</b> Vom Wochenende in Gent aus ist <b>Brügge</b> der schönste Tagesausflug. Sag Bescheid, dann bau ich's ein.</p>
   </div>
  </div>
 </div>
 
 <script>
 const DATA = [
-  { n:1, city:"Amsterdam", lon:4.90, lat:52.37, dir:"l", date:"Do 17.–Fr 18. Sep",
-    stay:"Couchsurfing · 2 Nächte", ride:"Anreise & Radcheck · Tag zum Chillen", rest:true,
-    intro:"Ankommen, Räder aufbauen und einen ganzen Tag Amsterdam genießen, bevor's losgeht.",
+  { n:1, city:"Amsterdam", lon:4.90, lat:52.37, dir:"l", date:"Do 17.–Sa 19. Sep",
+    stay:"Couchsurfing · 3 Nächte", ride:"Anreise & Radcheck · 2 Tage zum Chillen", rest:true,
+    intro:"Ankommen, Räder aufbauen und zwei ganze Tage Amsterdam genießen, bevor's losgeht.",
     acts:{ kreativ:"<b>NDSM-Werft</b> in Amsterdam-Noord: Street-Art & Künstlerateliers in alten Werfthallen; dazu die Galerien im Westergas & Jordaan.",
            cafe:"Gemütliche braune Cafés im <b>Jordaan</b> und das Café auf der Dachterrasse der Zentralbibliothek (OBA) mit Blick über die Stadt.",
            natur:"<b>Vondelpark</b> zum Ankommen, das kreative <b>Westerpark</b> oder der riesige <b>Amsterdamse Bos</b>." } },
-  { n:2, city:"Leiden", lon:4.49, lat:52.16, dir:"l", date:"Sa 19. Sep",
+  { n:2, city:"Leiden", lon:4.49, lat:52.16, dir:"l", date:"So 20. Sep",
     stay:"Couchsurfing / B&B", ride:"von Amsterdam · ~45 km · ~3 Std",
     intro:"Durch Dünen und Polder in die charmante Grachtenstadt.",
     acts:{ kreativ:"<b>Museum De Lakenhal</b>: Kunst & Stadtgeschichte in einem alten Tuchmacherhaus.",
            cafe:"Braune Wasser-Cafés an den Grachten: <b>Einstein</b>, <b>Annie's</b> oder <b>Vlot</b> direkt am Kanal.",
            natur:"<b>Hortus Botanicus</b>, einer der ältesten botanischen Gärten Europas; plus 28 km Grachten zum Schlendern." } },
-  { n:3, city:"Rotterdam", lon:4.48, lat:51.92, dir:"l", date:"So 20. Sep",
+  { n:3, city:"Rotterdam", lon:4.48, lat:51.92, dir:"l", date:"Mo 21. Sep",
     stay:"Couchsurfing", ride:"von Leiden · ~40 km · ~2,5 Std",
     intro:"Kühne Architekturstadt an der Maas, ganz anders als der Rest.",
     acts:{ kreativ:"<b>Depot Boijmans Van Beuningen</b>, die <b>Kubuswoningen</b>, die <b>Markthal</b> und die Galerien der Witte de Withstraat.",
            cafe:"Top Specialty Coffee: <b>Man Met Bril</b> (eigene Rösterei), <b>Kuub</b> bei den Würfelhäusern, <b>Schot Roasters</b>.",
            natur:"<b>Museumpark</b> und <b>Het Park</b> an der Maas mit dem hellen Café Parqiet in einer 20er-Jahre-Villa." } },
-  { n:4, city:"Dordrecht & Kinderdijk", lon:4.67, lat:51.81, dir:"r", date:"Mo 21. Sep",
+  { n:4, city:"Dordrecht & Kinderdijk", lon:4.67, lat:51.81, dir:"r", date:"Di 22. Sep",
     stay:"Couchsurfing / B&B", ride:"von Rotterdam · ~35 km · ~2,5 Std",
     intro:"Über die UNESCO-Windmühlen von Kinderdijk in die älteste Stadt Hollands.",
     acts:{ kreativ:"<b>Kinderdijk</b>, 19 Windmühlen (UNESCO-Welterbe); rein in eine Mühle und schauen, wie der Müller lebte.",
            cafe:"Historische Altstadt-Cafés von Dordrecht entlang der alten Häfen.",
            natur:"Nationalpark <b>De Biesbosch</b>, ein seltenes Süßwasser-Gezeitengebiet; am besten per Rad erkunden." } },
-  { n:5, city:"Antwerpen", lon:4.40, lat:51.22, dir:"l", date:"Di 22. Sep",
+  { n:5, city:"Antwerpen", lon:4.40, lat:51.22, dir:"l", date:"Mi 23. Sep",
     stay:"Couchsurfing", ride:"von Dordrecht · ~50 km (+ kurzer Zug-Hop) · Grenze nach 🇧🇪",
     intro:"Willkommen in Belgien: Mode, Kunst und Hafenluft.",
     acts:{ kreativ:"<b>MoMu</b> (Modemuseum), <b>KMSKA</b> (Kunstmuseum, frisch renoviert) und der <b>Middelheim</b> Freilicht-Skulpturenpark.",
            cafe:"<b>Bakkerij Funk</b> (pflanzliche Pâtisserie + Specialty Coffee), <b>Polly</b> und <b>Nives</b> am Harmoniepark.",
            natur:"<b>Stadspark</b>, der weitläufige <b>Rivierenhof</b> und die Schelde-Promenade beim Het Steen." } },
-  { n:6, city:"Gent", lon:3.72, lat:51.05, dir:"r", date:"Mi 23.–Do 24. Sep",
-    stay:"Couchsurfing · + Ruhetag", ride:"von Antwerpen · ~55 km · ~3,5 Std",
-    intro:"Unsere kreative Lieblingsstadt, mittelalterlich, jung und voller Kunst. Hier bleiben wir 2 Nächte.",
+  { n:6, city:"Gent", lon:3.72, lat:51.05, dir:"r", date:"Do 24.–So 27. Sep",
+    stay:"Wochenende · bleiben!", ride:"von Antwerpen · ~55 km · ~3,5 Std · Ziel! 🎯", finale:true,
+    intro:"Unser großes Finale: das ganze Wochenende in unserer kreativen Lieblingsstadt, mittelalterlich, jung und voller Kunst.",
     acts:{ kreativ:"Die <b>Graffiti-Gasse</b> (Werregarenstraat) ändert sich wöchentlich; dazu 140+ Murals und das Viertel <b>Patershol</b>.",
            cafe:"Am <b>Graslei</b> direkt am Wasser sitzen, Terrasse im <b>Waterhuis aan de Bierkant</b>, Biere in der <b>Dulle Griet</b>.",
            natur:"Naturreservat <b>Bourgoyen-Ossemeersen</b> am Stadtrand: Wiesen, Wasservögel, Ruhe." } },
-  { n:7, city:"Brüssel", lon:4.35, lat:50.85, dir:"r", date:"Fr 25.–So 27. Sep",
-    stay:"Wochenende · bleiben!", ride:"von Gent · ~55 km · ~3,5 Std · Ziel! 🎯", finale:true,
-    intro:"Unser Wochenende zum Bleiben, Genießen und Feiern.",
-    acts:{ kreativ:"Die <b>Comic-Strip-Route</b>: 80+ riesige Wandbilder (Tim & Struppi, Lucky Luke) und das Comic-Museum im Art-Nouveau-Bau von Victor Horta.",
-           cafe:"Heiße Schokolade & Kaffee am <b>Grand Sablon</b>, historische Brasserien und natürlich belgisches Bier & Waffeln. 🧇",
-           natur:"<b>Bois de la Cambre</b>, großer Stadtwald mit See; per Fähre zur Robinson-Insel mit Bar mittendrin." } },
 ];
 
 const NS="http://www.w3.org/2000/svg";
