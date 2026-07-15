@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Unser Bikepacking Abenteuer: Lisa & Paulina radeln von Amsterdam nach Brüssel, 17.–27. September 2026.">
+<meta name="theme-color" content="#EFE7D5">
+<meta property="og:title" content="Amsterdam → Brüssel · Unsere Reise">
+<meta property="og:description" content="Unser Bikepacking Abenteuer Lisa & Paulina — 7 Städte, ~290 km, 11 Tage.">
+<meta property="og:type" content="website">
+<title>Amsterdam → Brüssel · Unsere Reise</title>
+<style>
+  :root {
+    --paper:#EFE7D5; --land:#E5DCC5; --card:#F7F1E3;
+    --ink:#213A33; --ink-soft:#5c6a62; --hair:#d8cdb4;
+    --sea:#BFD3DE; --sea-line:#7CA0B3;
+    --route:#D6862A;
+    --kreativ:#B44A30; --cafe:#9A6A3B; --natur:#6C8B49;
+    --pin:#B44A30; --pin-ink:#fff;
+    --font-display:Georgia,'Iowan Old Style','Times New Roman',serif;
+    --font-body:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --font-mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --paper:#121D1A; --land:#1A2723; --card:#1B2723;
+      --ink:#ECE3D0; --ink-soft:#9db0a7; --hair:#2c3c37;
+      --sea:#17303B; --sea-line:#356070;
+      --route:#E8A63E;
+      --kreativ:#E0765A; --cafe:#C9A06A; --natur:#9DBE74;
+      --pin:#E0765A; --pin-ink:#121D1A;
+    }
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  .page{
+    background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); line-height:1.55;
+    min-height:100vh; padding:clamp(20px,4vw,56px);
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1160px; margin:0 auto}
+
+  /* ---- header ---- */
+  header{margin-bottom:clamp(28px,4vw,48px); max-width:760px}
+  .eyebrow{
+    font-family:var(--font-mono); font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--route); margin:0 0 14px;
+  }
+  h1{
+    font-family:var(--font-display); font-weight:600;
+    font-size:clamp(2.1rem,5.5vw,3.6rem); line-height:1.04;
+    letter-spacing:-.01em; text-wrap:balance; margin:0 0 16px;
+  }
+  h1 em{font-style:italic; color:var(--route)}
+  .lede{font-size:clamp(1.02rem,1.6vw,1.2rem); color:var(--ink-soft); margin:0 0 22px; max-width:60ch}
+  .dedication{font-family:var(--font-display); font-style:italic; font-size:1.05rem; color:var(--ink); margin:0 0 24px}
+  .stats{display:flex; flex-wrap:wrap; gap:10px 0; font-family:var(--font-mono); font-size:12.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft)}
+  .stats span{padding:0 16px; border-left:1px solid var(--hair)}
+  .stats span:first-child{padding-left:0; border-left:0}
+
+  /* ---- legend ---- */
+  .legend{display:flex; flex-wrap:wrap; gap:18px; margin-top:24px}
+  .legend b{display:inline-flex; align-items:center; gap:7px; font-weight:600; font-size:13px}
+  .dot{width:11px; height:11px; border-radius:50%}
+
+  /* ---- layout ---- */
+  .grid{display:grid; grid-template-columns:minmax(300px,0.9fr) 1.1fr; gap:clamp(24px,3vw,48px); align-items:start; margin-top:clamp(28px,4vw,44px)}
+  @media (max-width:820px){ .grid{grid-template-columns:1fr} }
+
+  .mapcol{position:sticky; top:24px}
+  @media (max-width:820px){ .mapcol{position:static; margin-bottom:8px} }
+  .mapframe{background:var(--land); border:1px solid var(--hair); border-radius:14px; padding:10px; box-shadow:0 1px 0 var(--hair)}
+  svg.map{display:block; width:100%; height:auto}
+
+  /* ---- cards ---- */
+  .days{display:flex; flex-direction:column; gap:16px}
+  .card{
+    background:var(--card); border:1px solid var(--hair); border-radius:14px;
+    padding:20px 22px; scroll-margin-top:24px;
+    transition:border-color .2s ease, transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover{border-color:var(--route)}
+  .card.active{border-color:var(--route); box-shadow:0 0 0 2px var(--route) inset, 0 8px 24px rgba(0,0,0,.08); transform:translateY(-1px)}
+  .card:focus-visible{outline:2px solid var(--route); outline-offset:3px}
+  .chead{display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap}
+  .tag{font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--route)}
+  .stay{font-family:var(--font-mono); font-size:11.5px; letter-spacing:.05em; color:var(--ink-soft)}
+  .city{font-family:var(--font-display); font-weight:600; font-size:1.55rem; margin:4px 0 2px; letter-spacing:-.01em}
+  .ride{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); margin:0 0 12px; letter-spacing:.02em}
+  .ride.rest{color:var(--natur)}
+  .intro{font-size:.97rem; color:var(--ink-soft); margin:0 0 16px; max-width:58ch}
+  .acts{display:flex; flex-direction:column; gap:11px; margin:0; padding:0; list-style:none}
+  .acts li{display:grid; grid-template-columns:78px 1fr; gap:12px; align-items:baseline; font-size:.95rem}
+  .acts .k{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; font-weight:700; padding-top:2px}
+  .k.kreativ{color:var(--kreativ)} .k.cafe{color:var(--cafe)} .k.natur{color:var(--natur)}
+  .acts .v b{font-weight:600}
+
+  /* ---- footer ---- */
+  .note{margin-top:clamp(30px,4vw,48px); padding-top:24px; border-top:1px solid var(--hair); color:var(--ink-soft); font-size:.92rem; max-width:72ch}
+  .note b{color:var(--ink)}
+  .note p{margin:0 0 10px}
+
+  /* ---- to-do ---- */
+  .todo{margin-top:16px; padding-top:14px; border-top:1px dashed var(--hair)}
+  .todo-label{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); margin:0 0 9px}
+  .todo-list{display:flex; flex-direction:column; gap:7px; margin-bottom:10px}
+  .todo-list:empty{margin-bottom:0}
+  .todo-item{display:flex; align-items:center; gap:9px; font-size:.92rem}
+  .todo-item input[type=checkbox]{width:16px; height:16px; accent-color:var(--route); flex:none; cursor:pointer}
+  .todo-item span{flex:1}
+  .todo-item.done span{text-decoration:line-through; color:var(--ink-soft)}
+  .todo-item .del{border:0; background:none; color:var(--ink-soft); cursor:pointer; font-size:17px; line-height:1; padding:2px 5px; border-radius:6px}
+  .todo-item .del:hover{color:var(--kreativ)}
+  .todo-add{display:flex; gap:8px}
+  .todo-add input[type=text]{flex:1; min-width:0; font-family:var(--font-body); font-size:.9rem; padding:7px 11px; border:1px solid var(--hair); border-radius:8px; background:var(--paper); color:var(--ink)}
+  .todo-add input[type=text]:focus-visible{outline:2px solid var(--route); outline-offset:1px; border-color:var(--route)}
+  .todo-add button{flex:none; width:36px; border:1px solid var(--hair); border-radius:8px; background:var(--paper); color:var(--ink); font-size:19px; line-height:1; cursor:pointer; transition:border-color .2s ease, color .2s ease}
+  .todo-add button:hover{border-color:var(--route); color:var(--route)}
+  .todo-add button:focus-visible{outline:2px solid var(--route); outline-offset:1px}
+
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="page">
+ <div class="wrap">
+  <header>
+    <p class="eyebrow">Eine Überraschung · Herbst 2026</p>
+    <h1>Von Amsterdam <em>bergab</em> nach Brüssel</h1>
+    <p class="lede">Unser Bikepacking Abenteuer Lisa &amp; Paulina 🚲</p>
+    <div class="stats">
+      <span>7 Städte</span><span>~290 km</span><span>11 Tage</span><span>meist ~3 Std/Tag</span><span>17.–27. Sep 2026</span>
+    </div>
+    <div class="legend">
+      <b><span class="dot" style="background:var(--kreativ)"></span>🎨 Kreativ</b>
+      <b><span class="dot" style="background:var(--cafe)"></span>☕ Café</b>
+      <b><span class="dot" style="background:var(--natur)"></span>🌿 Natur</b>
+    </div>
+  </header>
+
+  <div class="grid">
+    <div class="mapcol">
+      <div class="mapframe">
+        <svg class="map" viewBox="0 0 560 830" role="img" aria-label="Karte der Radroute von Amsterdam nach Brüssel">
+          <!-- sea -->
+          <rect x="0" y="0" width="86" height="830" fill="var(--sea)"/>
+          <path d="M86 0 C 70 120, 104 210, 78 330 C 60 430, 100 520, 74 640 C 58 730, 92 790, 80 830" fill="none" stroke="var(--sea-line)" stroke-width="1.4" opacity=".5"/>
+          <g stroke="var(--sea-line)" stroke-width="1.2" opacity=".45" fill="none">
+            <path d="M20 150 q10 -6 20 0 t20 0"/>
+            <path d="M20 300 q10 -6 20 0 t20 0"/>
+            <path d="M20 470 q10 -6 20 0 t20 0"/>
+            <path d="M20 640 q10 -6 20 0 t20 0"/>
+          </g>
+          <text x="34" y="60" font-family="var(--font-mono)" font-size="10" letter-spacing="2" fill="var(--sea-line)" transform="rotate(-90 34 60)" style="text-transform:uppercase">Noordzee</text>
+
+          <!-- country divider -->
+          <line x1="90" y1="472" x2="540" y2="472" stroke="var(--ink-soft)" stroke-width="1" stroke-dasharray="2 6" opacity=".5"/>
+          <text x="516" y="452" text-anchor="end" font-family="var(--font-mono)" font-size="10.5" letter-spacing="3" fill="var(--ink-soft)" opacity=".7">NEDERLAND</text>
+          <text x="516" y="492" text-anchor="end" font-family="var(--font-mono)" font-size="10.5" letter-spacing="3" fill="var(--ink-soft)" opacity=".7">BELGIË</text>
+
+          <!-- route + pins injected here -->
+          <path id="route" fill="none" stroke="var(--route)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" opacity=".9"/>
+          <g id="pins"></g>
+        </svg>
+      </div>
+    </div>
+
+    <div class="days" id="days"></div>
+  </div>
+
+  <div class="note">
+    <p><b>Übernachten:</b> In Amsterdam, Rotterdam, Antwerpen, Gent & Brüssel gibt's große Couchsurfing-Communities 🛏️. Leiden & Dordrecht sind kleiner, dort notfalls ein günstiges B&B.</p>
+    <p><b>Etappen zu lang?</b> Tag 6 & 8 (~55 km) lassen sich easy per <b>Zug-Teilstück</b> kürzen. Räder darf man in NL & BE problemlos mitnehmen.</p>
+    <p><b>Lust auf mehr?</b> Ab Gent ist <b>Brügge</b> der schönste Abstecher (+1 Tag). Sag Bescheid, dann bau ich's ein.</p>
+  </div>
+ </div>
+</div>
+
+<script>
+const DATA = [
+  { n:1, city:"Amsterdam", lon:4.90, lat:52.37, dir:"l", date:"Do 17.–Fr 18. Sep",
+    stay:"Couchsurfing · 2 Nächte", ride:"Anreise & Radcheck · Tag zum Chillen", rest:true,
+    intro:"Ankommen, Räder aufbauen und einen ganzen Tag Amsterdam genießen, bevor's losgeht.",
+    acts:{ kreativ:"<b>NDSM-Werft</b> in Amsterdam-Noord: Street-Art & Künstlerateliers in alten Werfthallen; dazu die Galerien im Westergas & Jordaan.",
+           cafe:"Gemütliche braune Cafés im <b>Jordaan</b> und das Café auf der Dachterrasse der Zentralbibliothek (OBA) mit Blick über die Stadt.",
+           natur:"<b>Vondelpark</b> zum Ankommen, das kreative <b>Westerpark</b> oder der riesige <b>Amsterdamse Bos</b>." } },
+  { n:2, city:"Leiden", lon:4.49, lat:52.16, dir:"l", date:"Sa 19. Sep",
+    stay:"Couchsurfing / B&B", ride:"von Amsterdam · ~45 km · ~3 Std",
+    intro:"Durch Dünen und Polder in die charmante Grachtenstadt.",
+    acts:{ kreativ:"<b>Museum De Lakenhal</b>: Kunst & Stadtgeschichte in einem alten Tuchmacherhaus.",
+           cafe:"Braune Wasser-Cafés an den Grachten: <b>Einstein</b>, <b>Annie's</b> oder <b>Vlot</b> direkt am Kanal.",
+           natur:"<b>Hortus Botanicus</b>, einer der ältesten botanischen Gärten Europas; plus 28 km Grachten zum Schlendern." } },
+  { n:3, city:"Rotterdam", lon:4.48, lat:51.92, dir:"l", date:"So 20. Sep",
+    stay:"Couchsurfing", ride:"von Leiden · ~40 km · ~2,5 Std",
+    intro:"Kühne Architekturstadt an der Maas, ganz anders als der Rest.",
+    acts:{ kreativ:"<b>Depot Boijmans Van Beuningen</b>, die <b>Kubuswoningen</b>, die <b>Markthal</b> und die Galerien der Witte de Withstraat.",
+           cafe:"Top Specialty Coffee: <b>Man Met Bril</b> (eigene Rösterei), <b>Kuub</b> bei den Würfelhäusern, <b>Schot Roasters</b>.",
+           natur:"<b>Museumpark</b> und <b>Het Park</b> an der Maas mit dem hellen Café Parqiet in einer 20er-Jahre-Villa." } },
+  { n:4, city:"Dordrecht & Kinderdijk", lon:4.67, lat:51.81, dir:"r", date:"Mo 21. Sep",
+    stay:"Couchsurfing / B&B", ride:"von Rotterdam · ~35 km · ~2,5 Std",
+    intro:"Über die UNESCO-Windmühlen von Kinderdijk in die älteste Stadt Hollands.",
+    acts:{ kreativ:"<b>Kinderdijk</b>, 19 Windmühlen (UNESCO-Welterbe); rein in eine Mühle und schauen, wie der Müller lebte.",
+           cafe:"Historische Altstadt-Cafés von Dordrecht entlang der alten Häfen.",
+           natur:"Nationalpark <b>De Biesbosch</b>, ein seltenes Süßwasser-Gezeitengebiet; am besten per Rad erkunden." } },
+  { n:5, city:"Antwerpen", lon:4.40, lat:51.22, dir:"l", date:"Di 22. Sep",
+    stay:"Couchsurfing", ride:"von Dordrecht · ~50 km (+ kurzer Zug-Hop) · Grenze nach 🇧🇪",
+    intro:"Willkommen in Belgien: Mode, Kunst und Hafenluft.",
+    acts:{ kreativ:"<b>MoMu</b> (Modemuseum), <b>KMSKA</b> (Kunstmuseum, frisch renoviert) und der <b>Middelheim</b> Freilicht-Skulpturenpark.",
+           cafe:"<b>Bakkerij Funk</b> (pflanzliche Pâtisserie + Specialty Coffee), <b>Polly</b> und <b>Nives</b> am Harmoniepark.",
+           natur:"<b>Stadspark</b>, der weitläufige <b>Rivierenhof</b> und die Schelde-Promenade beim Het Steen." } },
+  { n:6, city:"Gent", lon:3.72, lat:51.05, dir:"r", date:"Mi 23.–Do 24. Sep",
+    stay:"Couchsurfing · + Ruhetag", ride:"von Antwerpen · ~55 km · ~3,5 Std",
+    intro:"Unsere kreative Lieblingsstadt, mittelalterlich, jung und voller Kunst. Hier bleiben wir 2 Nächte.",
+    acts:{ kreativ:"Die <b>Graffiti-Gasse</b> (Werregarenstraat) ändert sich wöchentlich; dazu 140+ Murals und das Viertel <b>Patershol</b>.",
+           cafe:"Am <b>Graslei</b> direkt am Wasser sitzen, Terrasse im <b>Waterhuis aan de Bierkant</b>, Biere in der <b>Dulle Griet</b>.",
+           natur:"Naturreservat <b>Bourgoyen-Ossemeersen</b> am Stadtrand: Wiesen, Wasservögel, Ruhe." } },
+  { n:7, city:"Brüssel", lon:4.35, lat:50.85, dir:"r", date:"Fr 25.–So 27. Sep",
+    stay:"Wochenende · bleiben!", ride:"von Gent · ~55 km · ~3,5 Std · Ziel! 🎯", finale:true,
+    intro:"Unser Wochenende zum Bleiben, Genießen und Feiern.",
+    acts:{ kreativ:"Die <b>Comic-Strip-Route</b>: 80+ riesige Wandbilder (Tim & Struppi, Lucky Luke) und das Comic-Museum im Art-Nouveau-Bau von Victor Horta.",
+           cafe:"Heiße Schokolade & Kaffee am <b>Grand Sablon</b>, historische Brasserien und natürlich belgisches Bier & Waffeln. 🧇",
+           natur:"<b>Bois de la Cambre</b>, großer Stadtwald mit See; per Fähre zur Robinson-Insel mit Bar mittendrin." } },
+];
+
+const NS="http://www.w3.org/2000/svg";
+const X0=3.5,X1=5.0,Y0=52.5,Y1=50.7, MX0=90,MX1=470,MY0=80,MY1=770;
+const proj=(lon,lat)=>[ (lon-X0)/(X1-X0)*(MX1-MX0)+MX0, (Y0-lat)/(Y0-Y1)*(MY1-MY0)+MY0 ];
+
+function smoothPath(pts){
+  let d="M"+pts[0][0].toFixed(1)+","+pts[0][1].toFixed(1);
+  for(let i=0;i<pts.length-1;i++){
+    const p0=pts[i-1]||pts[i], p1=pts[i], p2=pts[i+1], p3=pts[i+2]||p2;
+    const c1x=p1[0]+(p2[0]-p0[0])/6, c1y=p1[1]+(p2[1]-p0[1])/6;
+    const c2x=p2[0]-(p3[0]-p1[0])/6, c2y=p2[1]-(p3[1]-p1[1])/6;
+    d+="C"+c1x.toFixed(1)+","+c1y.toFixed(1)+" "+c2x.toFixed(1)+","+c2y.toFixed(1)+" "+p2[0].toFixed(1)+","+p2[1].toFixed(1);
+  }
+  return d;
+}
+
+const pts = DATA.map(d=>proj(d.lon,d.lat));
+document.getElementById("route").setAttribute("d", smoothPath(pts));
+
+const pinsG=document.getElementById("pins");
+const daysEl=document.getElementById("days");
+
+const todoKey=n=>"reise-todo-"+n;
+function loadTodos(n){ try{ return JSON.parse(localStorage.getItem(todoKey(n)))||[]; }catch(e){ return []; } }
+function saveTodos(n,arr){ try{ localStorage.setItem(todoKey(n),JSON.stringify(arr)); }catch(e){} }
+
+function setActive(i){
+  document.querySelectorAll(".card").forEach((c,j)=>c.classList.toggle("active", j===i));
+  pinsG.querySelectorAll("g[data-i]").forEach(g=>{
+    const on = +g.dataset.i===i;
+    g.querySelector("circle").setAttribute("r", on?11:8);
+    g.querySelector("circle").setAttribute("fill", on?"var(--route)":"var(--pin)");
+  });
+}
+
+DATA.forEach((d,i)=>{
+  const [x,y]=pts[i];
+  // pin
+  const g=document.createElementNS(NS,"g");
+  g.dataset.i=i; g.setAttribute("tabindex","0"); g.setAttribute("role","button");
+  g.setAttribute("aria-label", d.city);
+  g.style.cursor="pointer";
+  const c=document.createElementNS(NS,"circle");
+  c.setAttribute("cx",x); c.setAttribute("cy",y); c.setAttribute("r",8);
+  c.setAttribute("fill","var(--pin)"); c.setAttribute("stroke","var(--card)"); c.setAttribute("stroke-width","2.5");
+  const num=document.createElementNS(NS,"text");
+  num.setAttribute("x",x); num.setAttribute("y",y+3.6); num.setAttribute("text-anchor","middle");
+  num.setAttribute("font-family","var(--font-mono)"); num.setAttribute("font-size","9.5"); num.setAttribute("font-weight","700");
+  num.setAttribute("fill","var(--pin-ink)"); num.textContent=d.n;
+  const lbl=document.createElementNS(NS,"text");
+  const lx = d.dir==="r" ? x+16 : x-16;
+  lbl.setAttribute("x",lx); lbl.setAttribute("y",y+4);
+  lbl.setAttribute("text-anchor", d.dir==="r" ? "start":"end");
+  lbl.setAttribute("font-family","var(--font-display)"); lbl.setAttribute("font-size","15"); lbl.setAttribute("font-style","italic");
+  lbl.setAttribute("fill","var(--ink)"); lbl.textContent=d.city;
+  g.append(c,num,lbl); pinsG.append(g);
+  g.addEventListener("mouseenter",()=>setActive(i));
+  g.addEventListener("click",()=>{ setActive(i); document.querySelectorAll(".card")[i].scrollIntoView({behavior:"smooth",block:"center"}); });
+  g.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){e.preventDefault(); setActive(i); document.querySelectorAll(".card")[i].scrollIntoView({behavior:"smooth",block:"center"});} });
+
+  // card
+  const card=document.createElement("div");
+  card.className="card"; card.tabIndex=0;
+  card.innerHTML=`
+    <div class="chead"><span class="tag">Tag ${d.n} · ${d.date}</span><span class="stay">${d.stay}</span></div>
+    <h3 class="city">${d.city}</h3>
+    <p class="ride ${d.rest?'rest':''}">${d.ride}</p>
+    <p class="intro">${d.intro}</p>
+    <ul class="acts">
+      <li><span class="k kreativ">Kreativ</span><span class="v">${d.acts.kreativ}</span></li>
+      <li><span class="k cafe">Café</span><span class="v">${d.acts.cafe}</span></li>
+      <li><span class="k natur">Natur</span><span class="v">${d.acts.natur}</span></li>
+    </ul>
+    <div class="todo">
+      <p class="todo-label">Unsere To-dos</p>
+      <div class="todo-list"></div>
+      <form class="todo-add"><input type="text" placeholder="To-do hinzufügen…" aria-label="Neues To-do für Tag ${d.n}"><button type="submit" aria-label="To-do hinzufügen">+</button></form>
+    </div>`;
+  card.addEventListener("mouseenter",()=>setActive(i));
+  card.addEventListener("focus",()=>setActive(i));
+
+  // to-dos
+  const listEl=card.querySelector(".todo-list");
+  let todos=loadTodos(d.n);
+  function renderTodos(){
+    listEl.textContent="";
+    todos.forEach((t,ti)=>{
+      const row=document.createElement("label");
+      row.className="todo-item"+(t.done?" done":"");
+      const cb=document.createElement("input"); cb.type="checkbox"; cb.checked=t.done;
+      cb.addEventListener("change",()=>{ todos[ti].done=cb.checked; saveTodos(d.n,todos); renderTodos(); });
+      const sp=document.createElement("span"); sp.textContent=t.text;
+      const del=document.createElement("button"); del.type="button"; del.className="del"; del.textContent="×"; del.title="Löschen"; del.setAttribute("aria-label","To-do löschen");
+      del.addEventListener("click",e=>{ e.preventDefault(); todos.splice(ti,1); saveTodos(d.n,todos); renderTodos(); });
+      row.append(cb,sp,del); listEl.append(row);
+    });
+  }
+  renderTodos();
+  const form=card.querySelector(".todo-add");
+  const input=form.querySelector("input");
+  form.addEventListener("submit",e=>{ e.preventDefault(); const v=input.value.trim(); if(!v)return; todos.push({text:v,done:false}); saveTodos(d.n,todos); input.value=""; renderTodos(); });
+
+  daysEl.append(card);
+});
+
+setActive(DATA.length-1);
+</script>
+</body>
+</html>
