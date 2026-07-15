@@ -120,6 +120,22 @@
   .todo-add button:hover{border-color:var(--route); color:var(--route)}
   .todo-add button:focus-visible{outline:2px solid var(--route); outline-offset:1px}
 
+  /* ---- packliste ---- */
+  .pack{margin-top:clamp(34px,5vw,56px); padding-top:clamp(26px,3vw,34px); border-top:1px solid var(--hair)}
+  .pack-head{max-width:64ch; margin-bottom:clamp(20px,3vw,28px)}
+  .pack-head .eyebrow{margin-bottom:10px}
+  .pack-head h2{font-family:var(--font-display); font-weight:600; font-size:clamp(1.5rem,3vw,2.1rem); letter-spacing:-.01em; margin:0 0 8px}
+  .pack-head p{color:var(--ink-soft); font-size:.97rem; margin:0}
+  .pack-count{font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; color:var(--route); font-weight:700}
+  .pack-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px}
+  .pack-cat{background:var(--card); border:1px solid var(--hair); border-radius:14px; padding:18px 20px 16px}
+  .pack-cat h3{font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--route); margin:0 0 12px; display:flex; align-items:center; gap:7px}
+  .pack-items{display:flex; flex-direction:column; gap:9px; margin:0; padding:0; list-style:none}
+  .pack-item{display:flex; align-items:baseline; gap:9px; font-size:.93rem; cursor:pointer}
+  .pack-item input[type=checkbox]{width:16px; height:16px; accent-color:var(--route); flex:none; cursor:pointer; position:relative; top:2px}
+  .pack-item span{flex:1}
+  .pack-item.done span{text-decoration:line-through; color:var(--ink-soft)}
+
   @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
 </style>
 </head>
@@ -169,6 +185,15 @@
 
     <div class="days" id="days"></div>
   </div>
+
+  <section class="pack" aria-labelledby="pack-title">
+    <div class="pack-head">
+      <p class="eyebrow">Bevor's losgeht</p>
+      <h2 id="pack-title">Packliste — <span class="pack-count" id="pack-count"></span></h2>
+      <p>Alles was in den Rucksack muss.</p>
+    </div>
+    <div class="pack-grid" id="pack-grid"></div>
+  </section>
  </div>
 </div>
 
@@ -317,6 +342,80 @@ DATA.forEach((d,i)=>{
 });
 
 setActive(DATA.length-1);
+
+// ---- packliste ----
+const PACK = [
+  { cat:"Rad & Gepäck", items:[
+    "Fahrrad-Check vorab (Bremsen, Kette, Reifen)",
+    "Spanngurte / Gepäckriemen",
+    "2 Trinkflaschen",
+    "Front- & Rücklicht (aufgeladen)",
+    "Fahrradschloss" ]},
+  { cat:"Reparatur & Werkzeug", items:[
+    "2 Ersatzschläuche + Flickzeug",
+    "Reifenheber",
+    "Minipumpe" ]},
+  { cat:"Kleidung (Zwiebelprinzip)", items:[
+    "Regenjacke (wasserdicht!)",
+    "Wärmeschicht (Merino/Fleece)",
+    "Handschuhe",
+    "Unterwäsche & Socken (Merino)",
+    "1 Set Klamotten für abends",
+    "Buff / Stirnband" ]},
+  { cat:"Übernachtung (Couchsurfing)", items:[
+    "Reisehandtuch (Mikrofaser)" ]},
+  { cat:"Bad & Gesundheit", items:[
+    "Kulturbeutel (Zahnbürste, Seife …)",
+    "Sonnencreme + Lippenpflege" ]},
+  { cat:"Technik", items:[
+    "Handy + Ladekabel",
+    "Powerbank",
+    "Kopfhörer" ]},
+  { cat:"Dokumente & Geld", items:[
+    "Perso / Reisepass",
+    "Krankenkassenkarte (EHIC)",
+    "Bankkarte + etwas Bargeld" ]},
+];
+
+const PACK_KEY="reise-packliste";
+function loadPack(){ try{ return JSON.parse(localStorage.getItem(PACK_KEY))||{}; }catch(e){ return {}; } }
+function savePack(state){ try{ localStorage.setItem(PACK_KEY,JSON.stringify(state)); }catch(e){} }
+
+const packGrid=document.getElementById("pack-grid");
+const packCount=document.getElementById("pack-count");
+const packState=loadPack();
+let packTotal=0;
+const packBoxes=[];
+
+function updatePackCount(){
+  const done=packBoxes.filter(cb=>cb.checked).length;
+  packCount.textContent=done+" / "+packTotal+" gepackt";
+}
+
+PACK.forEach((group,ci)=>{
+  const sec=document.createElement("div");
+  sec.className="pack-cat";
+  const h=document.createElement("h3");
+  h.textContent=group.cat;
+  const ul=document.createElement("ul");
+  ul.className="pack-items";
+  group.items.forEach((text,ii)=>{
+    const id="p-"+ci+"-"+ii;
+    const row=document.createElement("label");
+    row.className="pack-item"+(packState[id]?" done":"");
+    const cb=document.createElement("input");
+    cb.type="checkbox"; cb.checked=!!packState[id];
+    cb.addEventListener("change",()=>{
+      packState[id]=cb.checked; savePack(packState);
+      row.classList.toggle("done",cb.checked); updatePackCount();
+    });
+    const sp=document.createElement("span"); sp.textContent=text;
+    row.append(cb,sp); ul.append(row);
+    packBoxes.push(cb); packTotal++;
+  });
+  sec.append(h,ul); packGrid.append(sec);
+});
+updatePackCount();
 </script>
 </body>
 </html>
